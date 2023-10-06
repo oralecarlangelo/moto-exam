@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react"
-import { Car, CheckoutContextType, CheckoutEntry } from "../types"
+import { Car, CheckoutContextType, CheckoutEntry } from "../types/types"
 
 const CheckoutContext = React.createContext<CheckoutContextType | undefined>(
   undefined

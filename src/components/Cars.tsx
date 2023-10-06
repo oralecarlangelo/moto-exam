@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,60 +6,60 @@ import {
   StyleSheet,
   Modal,
   Button,
-} from "react-native"
-import { Car } from "./types"
-import { useNavigation } from "@react-navigation/native"
-import { StackNavigationProp } from "@react-navigation/stack"
+} from "react-native";
+import { Car } from "../types/types";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 interface IProps {
-  carList: Car[]
+  carList: Car[];
 }
 
 type RootStackParamList = {
-  Checkout: { car: Car; type: "Loan" | "Test Drive" }
-}
+  Checkout: { car: Car; type: "Loan" | "Test Drive" };
+};
 
 const CarsList: React.FC<IProps> = ({ carList }) => {
-  const [isModalVisible, setModalVisible] = useState(false)
-  const [selectedCar, setSelectedCar] = React.useState(null)
-  const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 10
-  const totalPages = Math.ceil(carList.length / itemsPerPage)
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [selectedCar, setSelectedCar] = React.useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const totalPages = Math.ceil(carList.length / itemsPerPage);
 
   const navigation =
-    useNavigation<StackNavigationProp<RootStackParamList, "Checkout">>()
+    useNavigation<StackNavigationProp<RootStackParamList, "Checkout">>();
 
   const handlePrevious = () => {
-    setCurrentPage(Math.max(1, currentPage - 1))
-  }
+    setCurrentPage(Math.max(1, currentPage - 1));
+  };
 
   const handleNext = () => {
-    setCurrentPage(Math.min(totalPages, currentPage + 1))
-  }
+    setCurrentPage(Math.min(totalPages, currentPage + 1));
+  };
 
   const currentItems = carList.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
-  )
+  );
 
   const showModal = (item: any) => {
-    setSelectedCar(item)
-    setModalVisible(true)
-  }
+    setSelectedCar(item);
+    setModalVisible(true);
+  };
 
   const hideModal = () => {
-    setModalVisible(false)
-  }
+    setModalVisible(false);
+  };
 
   const handleLoan = (item: any) => {
-    navigation.navigate("Checkout", { car: item, type: "Loan" })
-    hideModal()
-  }
+    navigation.navigate("Checkout", { car: item, type: "Loan" });
+    hideModal();
+  };
 
   const handleTestDrive = (item: any) => {
-    navigation.navigate("Checkout", { car: item, type: "Test Drive" })
-    hideModal()
-  }
+    navigation.navigate("Checkout", { car: item, type: "Test Drive" });
+    hideModal();
+  };
 
   return (
     <View style={styles.mainContainer}>
@@ -107,7 +107,7 @@ const CarsList: React.FC<IProps> = ({ carList }) => {
       </View>
       {/* Modal */}
       <Modal
-        animationType='slide'
+        animationType="slide"
         transparent={true}
         visible={isModalVisible}
         onRequestClose={hideModal}
@@ -121,17 +121,20 @@ const CarsList: React.FC<IProps> = ({ carList }) => {
             <TouchableOpacity onPress={hideModal} style={styles.closeButton}>
               <Text style={styles.closeButtonText}>×</Text>
             </TouchableOpacity>
-            <Text>Select an option:</Text>
-            <Button title='Loan' onPress={() => handleLoan(selectedCar)} />
-            <Button title='Test Drive' onPress={() => handleTestDrive(selectedCar)} />
+            <Text style={styles.modalTitle}>Select an option:</Text>
+            <Button title="Loan" onPress={() => handleLoan(selectedCar)} />
+            <Button
+              title="Test Drive"
+              onPress={() => handleTestDrive(selectedCar)}
+            />
           </View>
         </TouchableOpacity>
       </Modal>
     </View>
-  )
-}
+  );
+};
 
-export default CarsList
+export default CarsList;
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -146,7 +149,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     width: "48%",
-    padding: 5,
+    padding: 10,
     marginBottom: 10,
     borderWidth: 1,
     borderColor: "#ddd",
@@ -173,14 +176,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalView: {
-    margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    padding: 20,
     alignItems: "center",
     width: "80%",
     shadowColor: "#000",
@@ -202,4 +203,9 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
   },
-})
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+});

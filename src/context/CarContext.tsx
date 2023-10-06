@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, ReactNode } from "react";
-import { Car, ReturnedCar } from "../types";
+import { Car, ReturnedCar } from "../types/types";
 
 interface CarContextType {
   carList: any[];

@@ -1,13 +1,13 @@
 import React from "react"
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
-import HomeComponent from "./src/Home"
+import HomeComponent from "./src/screens/Home"
 import CheckoutProvider from "./src/context/CheckoutContext"
-import CheckoutScreen from "./src/Checkout"
-import CheckoutListScreen from "./src/CheckoutList"
+import CheckoutScreen from "./src/components/Checkout"
+import CheckoutListScreen from "./src/components/CheckoutList"
 import { CarProvider } from "./src/context/CarContext"
-import ReturnCarScreen from "./src/ReturnCar"
-import ReturnCarListScreen from "./src/ReturnCarList"
+import ReturnCarScreen from "./src/components/ReturnCar"
+import ReturnCarListScreen from "./src/components/ReturnCarList"
 
 const Stack = createStackNavigator()
 
